@@ -1,1 +1,46 @@
 @import '../../node_modules/bulma/bulma.sass';
+
+/*$fuente: Roboto bold*/
+$celeste-1: #A3ECF3;
+$celeste-2: #00BFD6;
+$cafe: #212121;
+$naranja: #FF9300;
+$ancho: 320px;
+$alto: 409px;
+
+#app {
+  width: $ancho;
+  height: $alto;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.field > .control {
+  border-bottom: 2px solid $naranja;
+}
+
+input.input {
+  border: none;
+}
+
+.label {
+  font-size: 0.6rem;
+  color: $naranja;
+  font-weight: bold;
+  font-family: "Roboto", sans-serif;
+}
+
+h2 {
+  font-size: 1.2rem;
+  color: $celeste-2;
+  font-weight: bold;
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+}
+
+button.button {
+  font-family: "Roboto", sans-serif;
+  font-weight: bold;
+}
