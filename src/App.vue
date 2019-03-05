@@ -1,11 +1,10 @@
 <template lang="pug">
   #app
-    p(v-show="showValue") {{ value }}
-    p(v-if="showValue") {{ value }}
-    p(v-else-if="false") {{ 'algo mas' }}
-    p(v-else) {{ 'default' }}
-    ul
-      li(v-for="item in items") {{ item }}
+    input(v-model="name")
+    p {{ name }}
+
+    a(v-bind:href="url") Ejemplo de v-bind&nbsp;
+    a(:href="url") - Shorthand de v-bind
 </template>
 
 <script>
@@ -13,9 +12,8 @@ export default {
   name: 'app',
   data () {
     return {
-      value: 'Valor!',
-      showValue: false,
-      items: [0,1,2,3,4,5]
+      name: "",
+      url: "https://www.google.com"
     }
   }
 }
