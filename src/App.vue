@@ -1,10 +1,8 @@
 <template lang="pug">
   #app
     input(v-model="name")
-    p {{ name }}
-
-    a(v-bind:href="url") Ejemplo de v-bind&nbsp;
-    a(:href="url") - Shorthand de v-bind
+    input(v-model="lastName")
+    p {{ fullName }}
 </template>
 
 <script>
@@ -13,7 +11,12 @@ export default {
   data () {
     return {
       name: "",
-      url: "https://www.google.com"
+      lastName: ""
+    }
+  },
+  computed: {
+    fullName() {
+      return `${this.name} ${this.lastName}`;
     }
   }
 }
