@@ -1,4 +1,4 @@
-import lwMusicService from './lwMusicService';
+import lwMusicService from './lw-music';
 
 const trackService = {};
 
