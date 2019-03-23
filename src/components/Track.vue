@@ -28,6 +28,7 @@ export default {
    methods: {
      selectTrack() {
        //evento que se quiere enviar al objeto padre
+       //información que se quiere que el objeto padre reciba
        this.$emit('select', this.track.id)
      }
    }
