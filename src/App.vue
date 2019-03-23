@@ -3,7 +3,7 @@
     lm-header
     lm-loader(v-show="isLoading")
     section.section(v-show="!isLoading")
-      nav.navbar.has-shadow
+      nav.navbar
         .navbar-item.is-expanded
           .field.has-addons
             .control.is-expanded
@@ -24,7 +24,10 @@
           .column.is-one-quarter(v-for="t in tracks")
             //Si no se coloca v-bind: en lugar de pasar un objeto, se estaría
             //pasando un valor literal (un string) y no el valor de la variable
-            lm-track(v-bind:track="t")
+            lm-track(
+              v-bind:class="{ 'is-active': t.id === selectedTrack }",
+              v-bind:track="t",
+              v-on:select="setSelectedTrack")
     lm-footer
 </template>
 
@@ -44,7 +47,8 @@ export default {
     return {
       searchQuery: "",
       tracks: [],
-      isLoading: false
+      isLoading: false,
+      selectedTrack: ""
     }
   },
   computed:{
@@ -63,6 +67,9 @@ export default {
           this.tracks = res.tracks.items
           this.isLoading = false
         });
+    },
+    setSelectedTrack(id) {
+      this.selectedTrack = id
     }
   }
 }
@@ -72,5 +79,8 @@ export default {
   @import './scss/main.scss';
   .results {
     padding: 2em;
+  }
+  .is-active {
+    border: 3px #23d160 solid;
   }
 </style>
