@@ -1,8 +1,11 @@
 <template lang="pug">
   #app
     lm-header
-    lm-notification(v-show="showNotification")
-      p(slot="body") No se encontraron resultados
+    lm-notification(
+      v-show="showNotification",
+      v-bind:noResults="noResults")
+      p(v-if="noResults" slot="body") No se encontraron resultados
+      p(v-else slot="body") {{ tracks.length }} canciones encontradas
     lm-loader(v-show="isLoading")
     section.section(v-show="!isLoading")
       nav.navbar
@@ -56,6 +59,7 @@ export default {
       tracks: [],
       isLoading: false,
       showNotification: false,
+      noResults: false,
       selectedTrack: ""
     }
   },
@@ -64,27 +68,20 @@ export default {
       return `Encontrados ${this.tracks.length}`;
     }
   },
-  watch: {
-    showNotification() {
-      if (this.showNotification) {
-        //this.showNotification = false
-        setTimeout(() => {
-          this.showNotification = false
-        }, 3000)
-      }
-    }
-  },
   methods: {
     search() {
       if (!this.searchQuery) {return;}
 
       this.isLoading = true
+      this.showNotification = false
+
 
       trackService.search(this.searchQuery)
         .then(res => {
-          this.showNotification = res.tracks.total === 0
+          this.noResults = res.tracks.total === 0
           this.tracks = res.tracks.items
           this.isLoading = false
+          this.showNotification = true
         });
     },
     setSelectedTrack(id) {
