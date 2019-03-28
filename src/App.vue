@@ -1,6 +1,8 @@
 <template lang="pug">
   #app
     lm-header
+    lm-notification(v-show="showNotification")
+      p(slot="body") No se encontraron resultados
     lm-loader(v-show="isLoading")
     section.section(v-show="!isLoading")
       nav.navbar
@@ -35,25 +37,41 @@
 //@ se puede usar para declarar un alias a una ruta en la directiva alias de
 //resolve en webpack.config.js
 import trackService from '@/services/track'
+
 import LmFooter from '@/components/layout/Footer.vue' //ES2015 convierte la sintaxis de PascalCase a kebab-case
 import LmHeader from '@/components/layout/Header.vue'
+
 import LmTrack from '@/components/Track.vue'
+
 import LmLoader from '@/components/shared/Loader.vue'
+import LmNotification from '@/components/shared/Notification.vue'
+
 
 export default {
   name: 'app',
-  components: { LmFooter, LmHeader, LmTrack, LmLoader },
+  components: { LmFooter, LmHeader, LmTrack, LmLoader, LmNotification },
   data () {
     return {
       searchQuery: "",
       tracks: [],
       isLoading: false,
+      showNotification: false,
       selectedTrack: ""
     }
   },
   computed:{
     searchMessage() {
       return `Encontrados ${this.tracks.length}`;
+    }
+  },
+  watch: {
+    showNotification() {
+      if (this.showNotification) {
+        //this.showNotification = false
+        setTimeout(() => {
+          this.showNotification = false
+        }, 3000)
+      }
     }
   },
   methods: {
@@ -64,6 +82,7 @@ export default {
 
       trackService.search(this.searchQuery)
         .then(res => {
+          this.showNotification = res.tracks.total === 0
           this.tracks = res.tracks.items
           this.isLoading = false
         });
