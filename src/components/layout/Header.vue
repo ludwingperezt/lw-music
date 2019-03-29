@@ -11,4 +11,13 @@
       .container.has-text-centered
         h1.title Lw Music
         h2.subtitle Canciones que están Vue-nísimas
+        lm-player
 </template>
+
+<script>
+  import LmPlayer from '@/components/Player'
+
+  export default {
+    components: { LmPlayer }
+  }
+</script>
