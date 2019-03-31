@@ -1,8 +1,13 @@
 import Vue from 'vue'
+import VueRouter from 'vue-router'
 import App from '@/App.vue'
+
+import routes from '@/routes'
 
 //Instalar el plugin event-bus
 import EventBus from '@/plugins/event-bus'
+
+Vue.use(VueRouter)
 
 // La función .use le indica a Vue que puede utilizar el plugin.  Ésta función
 // sirve para instalar plugins, librerías de terceros, frameworks, componentes,
@@ -11,7 +16,10 @@ import EventBus from '@/plugins/event-bus'
 // que se ejecuta la misma.
 Vue.use(EventBus)
 
+const router = new VueRouter({ routes })
+
 new Vue({
   el: '#app',
-  render: h => h(App)
+  render: h => h(App),
+  router //equivale a colocar router: router
 })
