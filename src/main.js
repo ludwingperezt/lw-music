@@ -16,7 +16,13 @@ Vue.use(VueRouter)
 // que se ejecuta la misma.
 Vue.use(EventBus)
 
-const router = new VueRouter({ routes })
+// Activar HistoryMode para evitar la combinación '/#/' en las rutas
+// Por medio de 'mode: history' se le dice al view-router que se quiere usar
+// el history mode nativo
+const router = new VueRouter({
+  routes,
+  mode: 'history'
+})
 
 new Vue({
   el: '#app',

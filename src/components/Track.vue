@@ -1,5 +1,5 @@
 <template lang="pug">
-  .card
+  .card(v-if="track && track.album")
     .card-image
       figure.image.is-1by1
         img(v-bind:src="track.album.images[0].url")
@@ -18,6 +18,8 @@
           .level-left
             a.level-item
               span.icon.is-small(@click="selectTrack") ▶️
+            a.level-item
+              span.icon.is-small(@click="goToTrack(track.id)") 🎵
 </template>
 
 <script>
@@ -34,6 +36,13 @@ export default {
        //Al seleccionar el track, emitir el evento 'set-track' a través de
        //event-bus y enviar el objeto track seleccionado
        this.$bus.$emit('set-track', this.track)
+     },
+     goToTrack(id) {
+       // Se utiliza push debido a que se utiliza el historial de HTML5 del
+       // browser, el cual se maneja por medio de estados que se van 'push-eando'
+       // (agregando), con ésto se mantiene la lógica entre lo que hace HTML5
+       // y view-router.
+       this.$router.push({ name: 'track', params: { id }})
      }
    }
 }
