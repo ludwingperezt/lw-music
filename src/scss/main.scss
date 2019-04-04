@@ -1,1 +1,16 @@
 @import '../../node_modules/bulma/bulma.sass';
+
+// las clases de transiciones se nombran con el siguiente patrón:
+// .<nombre de la transicion>-<estado de la transición>
+// Los estados de transición son proveídos por vue
+// En éste caso, la transición se llama move, y los hooks de la transición
+// que se utilizan son: -enter-active, -leave-active, -enter, -leave-to
+// (ver en Search.vue los elementos transition y como se utilizan)
+.move-enter-active, .move-leave-active {
+  transform: translateX(0);
+  transition: all .3s linear;
+}
+
+.move-enter, .move-leave-to {
+  transform: translateX(100%);
+}

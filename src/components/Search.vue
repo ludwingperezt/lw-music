@@ -1,11 +1,13 @@
 <template lang="pug">
   main
-    lm-notification(
-      v-show="showNotification",
-      v-bind:noResults="noResults")
-      p(v-if="noResults" slot="body") No se encontraron resultados
-      p(v-else slot="body") {{ tracks.length }} canciones encontradas
-    lm-loader(v-show="isLoading")
+    transition(name="move")
+      lm-notification(
+        v-show="showNotification",
+        v-bind:noResults="noResults")
+        p(v-if="noResults" slot="body") No se encontraron resultados
+        p(v-else slot="body") {{ tracks.length }} canciones encontradas
+    transition(name="move")
+      lm-loader(v-show="isLoading")
     section.section(v-show="!isLoading")
       nav.navbar
         .navbar-item.is-expanded
