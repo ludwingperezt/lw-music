@@ -10,6 +10,8 @@ import EventBus from '@/plugins/event-bus'
 // Importar el filtro
 import msToMm from '@/filters/ms-to-mm'
 
+import blur from '@/directives/blur'
+
 Vue.use(VueRouter)
 
 // La función .use le indica a Vue que puede utilizar el plugin.  Ésta función
@@ -21,6 +23,9 @@ Vue.use(EventBus)
 
 // Instala el plugin
 Vue.use(msToMm)
+
+// Instala la directiva
+Vue.use(blur)
 
 // Activar HistoryMode para evitar la combinación '/#/' en las rutas
 // Por medio de 'mode: history' se le dice al view-router que se quiere usar

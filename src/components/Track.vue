@@ -16,9 +16,9 @@
         small {{ track.duration_ms | ms-to-mm }}
         nav.level
           .level-left
-            a.level-item
+            button.level-item.button.is-primary
               span.icon.is-small(@click="selectTrack") ▶️
-            a.level-item
+            button.level-item.button.is-warning
               span.icon.is-small(@click="goToTrack(track.id)") 🎵
 </template>
 
@@ -29,6 +29,8 @@ export default {
   },
    methods: {
      selectTrack() {
+       if (!this.track.preview_url) { return }
+
        //evento que se quiere enviar al objeto padre
        //información que se quiere que el objeto padre reciba
        this.$emit('select', this.track.id)
@@ -38,6 +40,8 @@ export default {
        this.$bus.$emit('set-track', this.track)
      },
      goToTrack(id) {
+       if (!this.track.preview_url) { return }
+
        // Se utiliza push debido a que se utiliza el historial de HTML5 del
        // browser, el cual se maneja por medio de estados que se van 'push-eando'
        // (agregando), con ésto se mantiene la lógica entre lo que hace HTML5

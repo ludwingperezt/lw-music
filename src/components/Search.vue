@@ -28,8 +28,12 @@
         .columns.is-multiline
           .column.is-one-quarter(v-for="t in tracks")
             //Si no se coloca v-bind: en lugar de pasar un objeto, se estaría
-            //pasando un valor literal (un string) y no el valor de la variable
+            //pasando un valor literal (un string) y no el valor de la variable.
+            //En el caso de las directivas personalizadas, no importa como se
+            //llamen, siempre se debe anteponer 'v-', como en el ejemplo con la
+            //directiva blur
             lm-track(
+              v-blur="t.preview_url"
               v-bind:class="{ 'is-active': t.id === selectedTrack }",
               v-bind:track="t",
               v-on:select="setSelectedTrack")
