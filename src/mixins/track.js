@@ -3,13 +3,8 @@ const trackMixin = {
     selectTrack() {
       if (!this.track.preview_url) { return }
 
-      //evento que se quiere enviar al objeto padre
-      //información que se quiere que el objeto padre reciba
-      this.$emit('select', this.track.id)
-
-      //Al seleccionar el track, emitir el evento 'set-track' a través de
-      //event-bus y enviar el objeto track seleccionado
-      this.$bus.$emit('set-track', this.track)
+      //Se cambia el event bus por el store de vuex
+      this.$store.commit('setTrack', this.track)
     }
   }
 }

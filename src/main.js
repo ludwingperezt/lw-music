@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 import App from '@/App.vue'
 
 import routes from '@/routes'
-
+import store from '@/store'
 //Instalar el plugin event-bus
 import EventBus from '@/plugins/event-bus'
 
@@ -11,6 +11,8 @@ import EventBus from '@/plugins/event-bus'
 import msToMm from '@/filters/ms-to-mm'
 
 import blur from '@/directives/blur'
+
+
 
 Vue.use(VueRouter)
 
@@ -38,5 +40,6 @@ const router = new VueRouter({
 new Vue({
   el: '#app',
   render: h => h(App),
-  router //equivale a colocar router: router
+  router, //equivale a colocar router: router
+  store
 })
